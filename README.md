@@ -10,7 +10,17 @@ It uses [Maxmind Geo Lite Announced By AS](https://stat.ripe.net/docs/02.data-ap
 Install dependancies found on the requirements.txt file.
 
 ```shell
+git clone https://github.com/J0nan/AS-IPRanges-WHOIS.git
+cd AS-IPRanges-WHOIS
+python -m venv .
+source ./bin/activate #For linux/macOS
 pip install -r requirements.txt
+```
+
+To exit the Python Virtual Environment:
+
+```shell
+deactivate
 ```
 
 ## Usage
