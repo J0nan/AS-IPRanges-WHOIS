@@ -29,14 +29,17 @@ def get_whois_data(ipRange):
         return -1
     return ""
 
-def save_to_csv(results, filename):
+def save_to_csv(results, filename, headerRow):
     with open(filename, mode='w', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerow(["IP Range", "Description"])
-        writer.writerows([row for row in results if row[1] != -1])
+        writer = csv.writer(file, delimiter=',',)
+        writer.writerow(headerRow)
+        for result in results:
+            if result[1] != -1:
+                writer.writerow([result] if type(result) == str else result)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Fetch and save AS descriptions of IP ranges using RIPE.")
+    parser.add_argument("--saveIPs", required=False, default=False, action='store_true', help="Save all the IP ranges from the AS in a file")
     parser.add_argument("-AS", required=True, help="Autonomous System (AS) number to query.")
     parser.add_argument("-o", required=True, help="Output CSV file name.")
     args = parser.parse_args()
@@ -45,6 +48,9 @@ if __name__ == "__main__":
     outputFile = args.o
     
     ipRanges = get_ipRanges(asNumber)
+    if args.saveIPs:
+        save_to_csv(ipRanges, "IPs" + outputFile, ["IP Range"]) 
+        print(f"Results saved to {"IPs" + outputFile}")
     results = [(ip, get_whois_data(ip)) for ip in tqdm(ipRanges, desc="Fetching WHOIS data from RIPE")]
-    save_to_csv(results, outputFile)
+    save_to_csv(results, outputFile, ["IP Range", "Description"])
     print(f"Results saved to {outputFile}")
