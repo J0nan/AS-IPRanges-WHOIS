@@ -22,3 +22,5 @@ python AS-IPs-Whois.py -AS AS3333 -o AS3333.csv
 `-AS AS3333` sets the autonomous system.
 
 `-o AS3333.csv` sets the filename of the output.
+
+`--saveIPs` when added an extra file is saved, with all the IP ranges from the autonomous system.
