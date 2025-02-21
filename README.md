@@ -3,7 +3,7 @@ Fetch and save AS descriptions of IP ranges using RIPE
 
 ## How it works
 
-It uses [Maxmind Geo Lite Announced By AS](https://stat.ripe.net/docs/02.data-api/maxmind-geo-lite-announced-by-as.html) API in order to retrive all the IP ranges of an autonomous system. For all those IP ranges, it uses [Historical Whois](https://stat.ripe.net/docs/02.data-api/historical-whois.html) API in order to retrive the description asosited to thoses IPs. If the API call returns a message or does not have an exact match it will not be saved on the csv. On the other hand if it finds an exact match it will be saved on the csv with the description if it is founded.
+It uses [Maxmind Geo Lite Announced By AS](https://stat.ripe.net/docs/02.data-api/maxmind-geo-lite-announced-by-as.html) API in order to retrive all the IP ranges of an autonomous system. For all those IP ranges, it uses [Historical Whois](https://stat.ripe.net/docs/02.data-api/historical-whois.html) API in order to retrive the description asosited to thoses IPs.
 
 ## Requirements
 
@@ -34,3 +34,5 @@ python AS-IPs-Whois.py -AS AS3333 -o AS3333.csv
 `-o AS3333.csv` sets the filename of the output.
 
 `--saveIPs` when added an extra file is saved, with all the IP ranges from the autonomous system.
+
+`--noDescription` when added it will not save the IP ranges description from the AS in a file, it will only retrieve all the IP ranges of the autonomous system.
